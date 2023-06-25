@@ -1,10 +1,16 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
+import {GameProvider} from './src/GameContext';
+import GameBoard from './src/components/GameBoard';
+import NewGameButton from './src/components/NewGameButton';
 
 const App = () => {
   return (
     <SafeAreaView>
-      <Text>{'Good luck!'}</Text>
+      <GameProvider>
+        <NewGameButton />
+        <GameBoard />
+      </GameProvider>
     </SafeAreaView>
   );
 };
