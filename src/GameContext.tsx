@@ -72,6 +72,7 @@ export const GameProvider: ComponentType = ({children}) => {
   );
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
     if (choiceOne && choiceTwo && choiceOne.id !== choiceTwo.id) {
       if (choiceOne.imageName === choiceTwo.imageName) {
         setCards(prev =>
@@ -83,9 +84,12 @@ export const GameProvider: ComponentType = ({children}) => {
         );
         resetTurn();
       } else {
-        setTimeout(() => resetTurn(), 2000);
+        timeoutId = setTimeout(() => resetTurn(), 2000);
       }
     }
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [choiceOne, choiceTwo]);
 
   const value = useMemo(() => {
